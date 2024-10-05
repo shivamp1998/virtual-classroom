@@ -12,7 +12,6 @@ const io = new Server(server);
 //middlewares
 app.use(express.json());
 
-server.listen(PORT, () => {
-    console.log(`listening on PORT ${PORT}`);
-})
+
+module.exports = app;  
 
