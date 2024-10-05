@@ -1,0 +1,24 @@
+const express = require('express');
+const http = require('http');
+const { Server }  = require("socket.io");
+const db = require('./models/index')
+
+const app = express();
+const PORT = process.env.PORT || 3000;
+const server = http.createServer(app);
+const io = new Server(server);
+
+//middlewares
+app.use(express.json());
+
+//db connection
+// db.sequelize.authenticate()
+// .then(() => {
+
+// })
+
+
+server.listen(PORT, () => {
+    console.log(`listening on PORT ${PORT}`);
+})
+
