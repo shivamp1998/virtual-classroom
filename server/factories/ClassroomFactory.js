@@ -3,16 +3,21 @@ const StudentService = require('../services/StudentService');
 
 
 class ClassroomFactory {
-    constructor(name, type) {
+    constructor(name, role) {
         this.name = name;
-        this.type = type;
+        this.role = role;
     }
-    static getService() {
-        switch(type) {
+    
+    getService() {
+        switch(role) {
             case 'teacher' : 
                 return new TeacherService(this.name);
             case 'student' :
                 return new StudentService(this.name);
+            default: 
+                throw new Error('Invalid type provided to factory');
         }
     }
 }
+
+module.exports = ClassroomFactory

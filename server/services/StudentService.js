@@ -3,7 +3,7 @@ const ClassroomLogs = require('../models/ClassroomLogs');
 
 
 class StudentService {
-    async joinRoom(roomId, studentName) {
+    async joinRoom(roomId) {
         const classroom = await Classroom.findOne({
             where: {
                 roomId
