@@ -1,6 +1,6 @@
-const Classroom = require('../models/Classroom');
-const ClassroomLogs = require('../models/ClassroomLogs')
-
+const db = require('../models/index');
+const Classroom = db.Classroom;
+const ClassroomLogs = db.ClassroomLogs;
 class TeacherService {
     constructor(name) {
         this.teacherName = name;
@@ -8,10 +8,10 @@ class TeacherService {
     async joinClass(roomId) {
         let classroom = await Classroom.findOne({
             where: {
-                roomId
+                uuid: roomId
             }
         })
-        if(!classroom) {
+        if(!roomId || !classroom) {
             classroom = await Classroom.create();
         }
 
@@ -19,6 +19,7 @@ class TeacherService {
             participent: this.teacherName,
             role: 'teacher',
             action: 'joined',
+            classroomId: classroom.id
         })
         return classroom;   
     }

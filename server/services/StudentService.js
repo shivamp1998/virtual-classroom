@@ -1,16 +1,17 @@
-const Classroom = require('../models/Classroom');
+const db = require('../models/index');
 const ClassroomLogs = require('../models/ClassroomLogs');
-
+const Classroom = db.Classroom;
 
 class StudentService {
-    async joinRoom(roomId) {
+    async joinClass(roomId) {
         const classroom = await Classroom.findOne({
             where: {
-                roomId
+                uuid: roomId,
+                isDeleted: false
             }
         })
 
-        if(!classroom || !classroom.hasStarted) {
+        if(!roomId || !classroom || !classroom.hasStarted) {
             throw new Error('Class has not started Yet');
         }
 

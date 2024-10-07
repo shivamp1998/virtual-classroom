@@ -1,7 +1,5 @@
-const Classroom = require('../models/Classroom');
 const logger = require('../config/logger');
 const ClassroomFactory = require('../factories/ClassroomFactory');
-
 
 module.exports = {
     joinRoom: async (req, res) => {
@@ -9,15 +7,15 @@ module.exports = {
         try {
             const person = new ClassroomFactory(name, role);
             const personRole = person.getService();
-            const room = await personRole.joinRoom(roomId);
+            const room = await personRole.joinClass(roomId);
             if(role == 'teacher') {
                 studentList.add(name);
             }else{
                 teacherList.add(name);
             }
-            return room;
+            return res.send({data: room?.uuid});
         }catch(err) {
-            logger.error(err.message);
+            console.log(err);
             return res.status(400).send({error: err.message})
         }
     }

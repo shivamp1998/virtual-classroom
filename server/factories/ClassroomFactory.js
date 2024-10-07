@@ -7,9 +7,9 @@ class ClassroomFactory {
         this.name = name;
         this.role = role;
     }
-    
+
     getService() {
-        switch(role) {
+        switch(this.role) {
             case 'teacher' : 
                 return new TeacherService(this.name);
             case 'student' :

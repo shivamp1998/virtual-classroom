@@ -18,9 +18,9 @@ const io = new Server(server, {
     path: '/socket'
    
 });
+
 io.on('connection', (socket) => {
     logger.info(`connection to socket successfull: ${socket.id}`);
-
     socket.on("disconnect", (socket) => {
         logger.info(`socket disconnected`)
     })
@@ -28,9 +28,9 @@ io.on('connection', (socket) => {
 
 
 //middlewares
-app.use('/', routes);
-app.use(cors('*'))
+app.use(cors('*'));
 app.use(express.json());
+app.use('/', routes);
 
 
 
